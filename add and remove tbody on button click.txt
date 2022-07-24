@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<style>
+.textboxs{
+  text-align:center;
+  outline:none;
+  border:none;
+}
+table,th,td{
+ border:1px solid black;
+ border-collapse:collapse;
+ 
+}
+</style>
+<script>
+$(document).ready(function(){
+
+
+     
+     //remove tbody
+  
+  $("#removetbody").click(function(){
+  
+     $("#tablebody > tbody>tr"). empty(); 
+ 	 
+     $("#tablebody > tbody"). remove(); 
+   
+   var data ="<td colspan='4' style='text-align:center'>NO RECORDS...!!!</td>";
+  var tbodydata="<tbody><td colspan='4' style='text-align:center'>NO RECORDS...!!!</td></tbody>";
+  
+
+  
+  $("#tablebody").append(tbodydata);
+ 
+  });
+  
+  
+  //end
+  
+  //add tbody
+  $("#addtbody").click(()=>{
+  
+  var dataobj=[
+  {
+    "id" : "1",
+  	"name" : "Ganga",
+  	"location":"Devbhumi",
+    "salary":"343"
+  }
+  ,
+   {
+    "id" : "2",
+  	"name" : "Karna",
+  	"location":"Hasthina",
+    "salary":"343"
+  }
+  
+  ]
+  
+  
+  
+   var rows=""; 
+  $.each(dataobj,(key,values)=>{
+  
+  
+  		//alert(`id ${values.id} name ${values.name} location ${values.location} salary ${values.salary}`);
+  		//rows +=`<tr><td>${values.id}</td><td>${values.name}</td><td>${values.location}</td><td>${values.salary}</td></tr>`;
+  		rows +=`<tr><td><input  type="checkbox" class="keybox"></td><td><input  type="text" value="${values.name}" class="textboxs"> </td><td><input  type="text" value="${values.location}" class="textboxs" ></td><td><input  type="text" value="${values.salary}" class="textboxs"></td></tr>`
+   
+  });
+ 
+  var tbody = "<tbody>"+rows+ "</tbody>"
+    
+     $("#tablebody > tbody"). remove(); 
+  $("#tablebody").append(tbody);
+  
+  //for(var i in dataobj)
+ // {
+  // alert(dataobj[i]);
+  //}   worked but throught data like [object object]
+  
+  });
+  
+  //end
+  
+});
+</script>
+</head>
+<body>
+
+
+   
+   <button id="removetbody">Remove</button> &nbsp; &nbsp; &nbsp;  <button id="addtbody">Add</button>
+   <br>  <br>  <br>
+   
+   
+   <table id="tablebody" style="width:550px">
+   <thead>
+   	 <tr>
+		 <th>Select</th>
+ 		 <th>Firstname</th>
+ 		 <th>Location</th>
+ 		  <th>Salary</th>
+ 	 </tr>
+   </thead>
+
+  <tbody>
+   <tr>
+  <td><input  type="checkbox" class="keybox"></td>
+   <td><input  type="text" value="Sri"  ></td>
+  <td><input  type="text" value="Hyd"></td>
+    <td><input  type="text" value="0" ></td>
+  </tr>
+  <tr>
+  <td><input  type="checkbox" class="keybox"></td>
+   <td><input  type="text" value="Jai" ></td>
+  <td><input  type="text"  value="Del"></td>
+    <td><input  type="text" value="0" ></td>
+  </tr>
+    <tr>
+  <td><input  type="checkbox" class="keybox"></td>
+   <td><input  type="text" value="Krish" ></td>
+  <td><input  type="text" value="Ben" ></td>
+    <td><input  type="text" value="0"></td>
+  </tr>
+  </tbody>
+  
+   </table>
+   
+   
+   
+   
+<h3>https://github.com/14snotebook/JqueryonHTMLTables</h3>
+
+<a href="https://github.com/14snotebook/JqueryonHTMLTables">GIT HUB LINK</a>
+</body>
+</html>
