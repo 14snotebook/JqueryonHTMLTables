@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<style>
+
+table,tr,td,th{
+ border-collapse: collapse;
+ border:1px solid blue;
+ 
+}
+input{
+  text-align:center;
+  outline:none;
+  border:none;
+}
+button{
+ outline:none;
+  border:none;
+}
+button:hover{
+ background-color:black;
+ color:white
+}
+</style>
+<script>
+$(document).ready(function(){
+
+  $(".view").click(function(){
+   var row = $(this).closest('tr');
+   var sn= $(row).find('.sno').text();
+   //var name =$(row).find('.name').text();
+   var name =$(row).find('.name').val();
+   //var item = $(row).find('.item').text();
+   var item = $(row).find('.item').val();
+   alert("Hi "+name+" your item name is "+item+" and token number is "+sn );
+  });
+  
+});
+</script>
+</head>
+<body>
+ <table>
+       <thead>
+       <tr>
+       <th>Token Number</th><th>NAME</th><th>ITEM</th><th>VIWE</th>
+       </tr>
+       </thead>
+       <tbody> 
+       		<tr>
+       			<td> <span class="sno">IC001</span> </td>
+       			<td><input  type="text" value="Pradeep" class="name" > </td>
+       			<td><input  type="text" value="Icecream" class="item" > </td>
+      			<td><button class="view">VIEW</button></td>
+        	 </tr>
+          <tr>
+              <td><span class="sno">CO002</span> </td>
+              <td> <input  type="text" value="Pravalika" class="name" > </td>
+             <td> <input  type="text" value="Coffee" class="item" > </td>
+              <td><button class="view">VIEW</button></td>
+         </tr>
+       </tbody>
+ </table>
+ 
+</body>
+</html>
