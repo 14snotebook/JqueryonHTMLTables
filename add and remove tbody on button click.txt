@@ -137,3 +137,11 @@ $(document).ready(function(){
 <a href="https://github.com/14snotebook/JqueryonHTMLTables">GIT HUB LINK</a>
 </body>
 </html>
+================================================================================
+
+
+GET	->	http://localhost:9000/contacts/
+GET	->	http://localhost:9000/contacts/:contactID
+POST	->	http://localhost:9000/contacts/
+PUT	->	http://localhost:9000/contacts/:contactID
+DELETE	->	http://localhost:9000/contacts/:contactID
