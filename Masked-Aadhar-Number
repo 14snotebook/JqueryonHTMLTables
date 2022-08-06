@@ -1,0 +1,86 @@
+ <!DOCTYPE html>
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+   var actuallvalue;
+            var beforeight;
+            var aftereight;
+            $("#aadhar").keyup(function () {
+               // this.value = this.value.replace(/[^0-9⚫\.]/g, '');
+               this.value = this.value.replace(/[^0-9X\.]/g, '');
+              // this.value = this.value.replace(/[^0-9∙\.]/g, '');
+                var len = $(this).val().length;
+                if (len <= 8) {
+                    $("#aadhar").attr('type', 'password');
+                }
+                var data1 = $(this).val();
+                var regx = new RegExp("^[0-9]{12}$");
+                if (regx.test(data1)) {
+                    $('#aadharmess').html("");
+
+                }
+                else {
+                    var total = 12;
+                    var res = total - len;
+                    var starting = new RegExp("^[0-1]$");
+                    if (starting.test(data1.charAt(0))) {
+                        $(this).val('');
+                        $('#aadharmess').html(" Please enter proper Aadhar number. ");
+                    } else {
+    
+                        if (len <= 8) {
+                            beforeight = $(this).val();
+                        }
+                        else if (len > 8) {
+                            $("#aadhar").attr('type', 'text');
+                                var inputs = $(this).val();
+                                aftereight = inputs.substring(8);  
+                               // var dots = '⚫⚫⚫⚫⚫⚫⚫⚫';
+                               var dots = 'XXXXXXXX';
+                             // var dots='∙∙∙∙∙∙∙∙';
+                                var appending = dots + aftereight;
+                                $(this).val(appending);
+                                if (len == 12) {
+                                    actuallvalue = beforeight + aftereight;
+                                }
+                            
+                        }
+                        
+                        if (len < 12) {
+                            $("#aadharmess").fadeIn();
+                            $('#aadharmess').html(" You have to enter " + res + " digit(s) only ");
+                           
+                           
+                        }
+                        if (len==12) {
+                            $("#aadharmess").fadeOut();
+                        }
+                       
+                    }
+
+                }
+
+            });
+
+
+            $("#aadhar").blur(function () {
+                var len = $(this).val().length;
+                if (len == 12) {
+                    alert(' your Aadhar number is ' + actuallvalue + 'length of number is '+len);
+                }
+               
+            })
+
+});
+</script>
+</head>
+<body>
+
+
+                <input type="password" id="aadhar" maxlength="12" class="form-control" style="padding:2px !important;" autocomplete="off" placeholder="Enter Aadhar number" />
+                <p id="aadharmess" style="color:red;font-size:x-small">Please enter numbers only</p>
+
+</body>
+</html>
