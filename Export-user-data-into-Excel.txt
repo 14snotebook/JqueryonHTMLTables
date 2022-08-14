@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      background-color: #251D3A
+    }
+
+    section {
+      background-color: #C2DED1;
+    }
+    .comman::after {
+      content: ' *';
+      color: red;
+   }
+    .visibilityHide {
+      visibility: hidden;
+    }
+    .deActive{
+      background-color: transparent;
+      color: black;
+      pointer-events:none
+    }
+    .active{
+      background-color: rgb(36, 36, 238);
+      color:white;
+      pointer-events:auto
+    }
+  </style>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js">
+  </script>
+
+</head>
+
+<body>
+  <p class="h3 text-white">Export Data into ExcelSheet</p>
+  <section class="container mt-3 shadow-lg ">
+    <p class="text-center h3 p-3">Basic Info</p>
+    <div class="row p-3">
+
+      <div class="col-md-6 pt-2">
+        <label style="padding-left:123px" class="comman">Name</label>
+      </div>
+      <div class="col-md-6 pt-2">
+        <input type="text" class="form-control " id="name" autocomplete="off" />
+        <span class="text-danger nameerrormsg"  style="font-size: smaller; ;display: none;">Enter your Name</span>
+      </div>
+
+
+      <div class="col-md-6 pt-2">
+        <label style="padding-left:123px" class="comman">Father Name</label>
+      </div>
+      <div class="col-md-6 pt-2">
+        <input type="text" class="form-control " id="fatherName" autocomplete="off" />
+        <span class="text-danger fatherNameerrormsg"  style="font-size: smaller ;display: none;">Enter your FatherName</span>
+      </div>
+
+      <div class="col-md-6 pt-2">
+        <label style="padding-left:123px" class="comman">Mother Name </label>
+      </div>
+      <div class="col-md-6 pt-2">
+        <input type="text" class="form-control" id="motherName" autocomplete="off" />
+        <span class="text-danger motherNameerrormsg"  style="font-size:smaller ;display: none;">Enter your MotherName </span>
+      </div>
+
+      <div class="col-md-6 pt-2">
+        <label style="padding-left:123px" class="comman">Gender </label>
+      </div>
+      <div class="col-md-6 pt-2">
+        <input type="radio" class="form-check-input" name="gender" value="Male" /> Male&nbsp
+        <input type="radio" class="form-check-input" name="gender" value="Female" /> Female
+        <span class="text-danger gendererrormsg"  style="font-size: smaller ;display: none;">Select your Gender</span>
+      </div>
+
+      <div class="col-md-6 pt-2">
+        <label style="padding-left:123px" class="comman">Date of Birth </label>
+      </div>
+      <div class="col-md-6 pt-2">
+        <input type="date" class="form-control" id="dob" />
+        <span class="text-danger doberrormsg"  style="font-size: smaller ;display: none;">Enter your Date of Birth</span>
+      </div>
+
+
+      <div class="col-md-6 pt-2">
+        <label style="padding-left:123px" class="comman">Marital Status</label>
+      </div>
+      <div class="col-md-6 pt-2">
+        <input type="radio" class="form-check-input" name="marital" value="Married" /> Married&nbsp
+        <input type="radio" class="form-check-input" name="marital" value="UnMarried" /> UnMarried
+        <span class="text-danger maritalerrormsg"  style="font-size: smaller ;display: none;">Select your Marital Status</span>
+      </div>
+
+      <div class="col-md-6 pt-2">
+        <label style="padding-left:123px" class="comman">Religion</label>
+      </div>
+      <div class="col-md-6 pt-2">
+        <input type="text" class="form-control" id="religion" autocomplete="off" />
+        <span class="text-danger religionerrormsg"  style="font-size: smaller ;display: none;">Enter your Religion</span>
+      </div>
+
+      <div class="col-md-6 pt-2">
+        <label style="padding-left:123px" class="comman">Email</label>
+      </div>
+      <div class="col-md-6 pt-2">
+        <input type="email" class="form-control" id="email" autocomplete="off" />
+        <span class="text-danger emailerrormsg"  style="font-size: smaller ;display: none;">Enter your Email</span>
+      </div>
+
+      <div class="col-md-6 pt-2">
+        <label style="padding-left:123px" class="comman">MoblieNo</label>
+      </div>
+      <div class="col-md-6 pt-2">
+        <input type="text" class="form-control" id="mobileNo" maxlength="10" autocomplete="off" />
+        <span class="text-danger mobileNoerrormsg"  style="font-size: smaller ;display: none;">Enter your MobileNo</span>
+      </div>
+
+      <div class="col-md-6 pt-2">
+        <label style="padding-left:123px" class="comman" >Address</label>
+      </div>
+      <div class="col-md-6 pt-2">
+        <textarea cols="30" rows="2" class="form-control" id="address" name="message"></textarea>
+        <span class="text-danger addresserrormsg"  style="font-size: smaller ;display: none;">Enter your Address</span>
+      </div>
+
+      <div class="col-md-6 pt-2">
+      </div>
+      <div class="col-md-6 pt-2">
+        <div class="d-grid gap-2">
+          <button class="btn btn-primary" id="Export" type="button">Export to Excel</button>
+        </div>
+      </div>
+    </div>
+    <section>
+      <div id='MessageHolder'></div>
+      <a href="#" id="testAnchor"></a>
+</body>
+
+</html>
+<script>
+  $(document).ready(function () {
+
+    
+
+    $("#Export").addClass("deActive");
+    var name=false;
+    var fatherName=false;
+    var motherName=false;
+    var gender=false;
+    var dob=false;
+    var marital=false;
+    var religion= false;
+    var email=false;
+    var mobileNo=false;
+    var address=false;
+
+    $("#name").keyup(()=>{
+        var msg = $("#name").val().trim();
+      if(msg==""||msg==undefined||msg==null){
+        name=false;
+        buttonActivate();
+        $(".nameerrormsg").fadeIn(1000);
+         // $(".nameerrormsg").show(1000); under testing
+      }
+      else{
+      $(".nameerrormsg").fadeOut(1000);
+          name=true;
+          buttonActivate();
+        // $(".nameerrormsg").hide(1000); under testing
+      }
+    })
+
+
+    $("#fatherName").keyup(()=>{
+        var msg = $("#fatherName").val().trim();
+      if(msg==""||msg==undefined||msg==null){
+        fatherName=false;
+        buttonActivate();
+        $(".fatherNameerrormsg").fadeIn(1000);
+      }
+      else{
+      $(".fatherNameerrormsg").fadeOut(1000);
+      fatherName=true;
+      buttonActivate();
+      }
+    })
+   
+
+    $("#motherName").keyup(()=>{
+        var msg = $("#motherName").val().trim();
+      if(msg==""||msg==undefined||msg==null){
+        motherName=false;
+        buttonActivate();
+        $(".motherNameerrormsg").fadeIn(1000);
+      }
+      else{
+      $(".motherNameerrormsg").fadeOut(1000);
+      motherName=true;
+      buttonActivate();
+      }
+    })
+
+
+    $("input[name=gender]:radio").change(function () {
+      gender=true;
+      buttonActivate()
+    })
+
+
+    $("#dob").change(()=>{
+        var msg = $("#dob").val();
+      if(msg==""||msg==undefined||msg==null){
+        debugger
+        dob=false;
+        buttonActivate();
+        $(".doberrormsg").fadeIn(1000);
+      }
+      else{
+      $(".doberrormsg").fadeOut(1000);
+      dob=true;
+      buttonActivate();
+      }
+    })
+
+    $("input[name=marital]:radio").change(function () {
+      marital=true;
+      buttonActivate()
+    })
+
+
+    $("#religion").keyup(()=>{
+        var msg = $("#religion").val().trim();
+      if(msg==""||msg==undefined||msg==null){
+        religion=false;
+        buttonActivate();
+        $(".religionerrormsg").fadeIn(1000);
+      }
+      else{
+      $(".religionerrormsg").fadeOut(1000);
+      religion=true;
+      buttonActivate();
+      }
+    })
+
+    $("#email").keyup(()=>{
+        var msg = $("#email").val().trim();
+      if(msg==""||msg==undefined||msg==null){
+        email=false;
+        buttonActivate();
+        $(".emailerrormsg").fadeIn(1000);
+      }
+      else{
+      $(".emailerrormsg").fadeOut(1000);
+      email=true;
+      buttonActivate();
+      }
+    })
+
+    $("#mobileNo").keyup(()=>{
+        var msg = $("#mobileNo").val().trim();
+      if(msg==""||msg==undefined||msg==null){
+        mobileNo=false;
+        buttonActivate();
+        $(".mobileNoerrormsg").fadeIn(1000);
+      }
+      else{
+      $(".mobileNoerrormsg").fadeOut(1000);
+      mobileNo=true;
+      buttonActivate();
+      }
+    })
+
+    $("#address").keyup(()=>{
+        var msg = $("#address").val().trim();
+      if(msg==""||msg==undefined||msg==null){
+        address=false;
+        buttonActivate();
+        $(".addresserrormsg").fadeIn(1000);
+      }
+      else{
+      $(".addresserrormsg").fadeOut(1000);
+      address=true;
+      buttonActivate();
+      }
+    })
+
+
+    function buttonActivate() {
+    if(name&&fatherName&&motherName&&gender&&dob&&marital&&religion&&email&&mobileNo&&address){
+      $("#Export").removeClass("deActive");
+      $("#Export").addClass("active"); 
+      //$("#Export").css("pointer-events","auto");
+    }
+    else{
+      $("#Export").removeClass("active"); 
+      $("#Export").addClass("deActive");
+      
+      //$("#Export").css("pointer-events","none","background-color","transparent");
+    }
+
+
+    }
+
+    // for download excel start  E1
+    $("#Export").click(function () {
+      var ColumnHead = "Personal Info";
+
+      var TableMarkUp = `<table id="myModifiedTable" class="visibilityHide">
+                  <thead>
+                  <tr>
+                  <td colspan="2" style="background-color:#1f4e78;color:white"><b> ${ColumnHead}  </b></td>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr>
+                    <td>Name</td>
+                    <td>${$("#name").val()}</td>
+                   </tr>
+                  <tr>
+                    <td>Father Name</td>
+                    <td>${$("#fatherName").val()}</td>
+                  </tr>
+                  <tr>
+                    <td>Mother Name</td>
+                    <td>${$("#motherName").val()}</td>
+                  </tr>
+                  <tr>
+                    <td> Gender</td>
+                    <td>${$('input[name="gender"]:checked').val()} </td>
+                  </tr>  
+                  <tr>
+                    <td>Date of Birth</td>
+                    <td>${$("#dob").val()} </td>
+                  </tr>  
+                  <tr>
+                    <td>Marital Status</td>
+                    <td>${$('input[name="marital"]:checked').val()} </td>
+                  </tr>  
+                  <tr>
+                    <td>Religion</td>
+                    <td>${$("#religion").val()} </td>
+                  </tr>  
+                  <tr>
+                    <td>Email</td>
+                    <td>${ $("#email").val()} </td>
+                  </tr>  
+                  <tr>
+                    <td>MoblieNo</td>
+                    <td>${ $("#mobileNo").val()} </td>
+                  </tr> 
+                  <tr>
+                    <td>Address</td>
+                    <td>${ $("#address").val()} </td>
+                  </tr> 
+              </tbody>
+              </table>`
+      $('#MessageHolder').append(TableMarkUp);
+      //ends here
+      tab_text = '<html xmlns:x="urn:schemas-microsoft-com:office:excel">';
+      tab_text = tab_text + '<head><xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet>';
+
+      tab_text = tab_text + '<x:Name>Error Messages</x:Name>';
+
+      tab_text = tab_text + '<x:WorksheetOptions><x:Panes></x:Panes></x:WorksheetOptions></x:ExcelWorksheet>';
+      tab_text = tab_text + '</x:ExcelWorksheets></x:ExcelWorkbook></xml></head><body>';
+
+      tab_text = tab_text + "<table border='1px'>";
+      tab_text = tab_text + $('#myModifiedTable').html();;
+      tab_text = tab_text + '</table></body></html>';
+
+      data_type = 'data:application/vnd.ms-excel';
+
+      var ua = window.navigator.userAgent;
+      var msie = ua.indexOf("MSIE ");
+
+      if (msie > 0 || !!navigator.userAgent.match(/Trident.*rv\:11\./)) {
+        if (window.navigator.msSaveBlob) {
+          var blob = new Blob([tab_text], {
+            type: "application/csv;charset=utf-8;"
+          });
+          navigator.msSaveBlob(blob, 'Test file.xls');
+        }
+      } else {
+        console.log(data_type);
+        console.log(tab_text);
+        $('#testAnchor')[0].click()
+      }
+      $('#MessageHolder').html("");
+    });
+    var tab_text;
+    var data_type = 'data:application/vnd.ms-excel';
+
+    $($("#testAnchor")[0]).click(function () {
+      var fileName=$("#name").val()+"_BasicInfo";
+     //reset block
+      $('input').val('');
+      $('input[type="radio"]').prop('checked', false);
+      $("#address").val('')
+      //close
+      // console.log(data_type);
+      // console.log(tab_text);
+      $('#testAnchor').attr('href', data_type + ', ' + encodeURIComponent(tab_text));
+      $('#testAnchor').attr('download', fileName);
+      
+    });
+
+
+
+  })
+</script>
