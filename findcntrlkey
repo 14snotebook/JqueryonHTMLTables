@@ -10,14 +10,8 @@ $(document).ready(function(){
   
  $(document).keydown(function(event) {
     
+      if (event.ctrlKey && String.fromCharCode(event.which)=="Z"){ alert("Z-works"); }
    
-   // if (!event.ctrlKey){ return true; }
-    if(String.fromCharCode(event.which)=="Z"){
-        alert("Z-works");
-    }
-
-
-   // $("#result").text(String.fromCharCode(event.which));
     event.preventDefault();
 });
   
