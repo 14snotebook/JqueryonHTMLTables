@@ -57,7 +57,7 @@ $(document).ready(function(){
         	 </tr>
           <tr>
               <td><span class="sno">CO002</span> </td>
-              <td> <input  type="text" value="Pravalika" class="name" > </td>
+              <td> <input  type="text" value="Vihari" class="name" > </td>
              <td> <input  type="text" value="Coffee" class="item" > </td>
              	<td><input  type="text" value="" class="price" > </td>
               <td><button class="view">VIEW</button></td>
